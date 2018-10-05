@@ -8,7 +8,9 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Usage
 
-**automatic defaults**
+The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
+
+**defaults for starterkit**
 ```php
 <?php
 return [
@@ -28,11 +30,21 @@ return [
 ];
 ```
 
-**config file example**
+**using a plain string**
 ```php
 <?php
 return [
-    'bnomei.robots-txt.content' => '# Only google should index images',
+    'bnomei.robots-txt.content' => 'user-agent: *
+disallow: /kirby
+disallow: /site
+allow: /media',
+];
+```
+
+**sitemap and multiple user-agents**
+```php
+<?php
+return [
     'bnomei.robots-txt.sitemap' => 'sitemap.xml',
     'bnomei.robots-txt.groups' => [
         '*' => [
