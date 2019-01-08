@@ -2,7 +2,7 @@
     "name": "bnomei/kirby3-robots-txt",
     "type": "plugin",
     "description": "Manage the robots.txt from the Kirby config file",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "MIT",
     "authors": [
         {
@@ -43,6 +43,7 @@
     },
     "scripts": {
         "zip": [
+            "touch kirby3-robots-txt.zip",
             "rm kirby3-robots-txt.zip",
             "composer install --no-dev",
             "composer remove getkirby/cms",

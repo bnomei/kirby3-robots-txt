@@ -19,9 +19,9 @@ The plugin generates automatic defaults for the starterkit. You do not have to e
 ```php
 <?php
 return [
-    'bnomei.robots-txt.content' => null,
-    'bnomei.robots-txt.sitemap' => null,
-    'bnomei.robots-txt.groups' => [
+    'bnomei.robots-txt.content' => null, // string or callback
+    'bnomei.robots-txt.sitemap' => null, // string or callback
+    'bnomei.robots-txt.groups' => [ // array or callback
         '*' => [ // user-agent
             'disallow' => [
                 '/kirby',
@@ -43,6 +43,16 @@ return [
 disallow: /kirby
 disallow: /site
 allow: /media',
+];
+```
+
+**using a callback**
+```php
+<?php
+return [
+    'bnomei.robots-txt.content' => function() {
+        return site()->myRobotsTxtContentField()->value();
+    },
 ];
 ```
 
