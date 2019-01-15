@@ -11,6 +11,14 @@ This plugin is free but if you use it in a commercial project please consider to
 - [buy me ☕](https://buymeacoff.ee/bnomei) or
 - [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
+## Installation
+
+- for devkit-setup use `composer require bnomei/kirby3-robots-txt` or
+- extract latest release of [kirby3-robots-txt.zip](https://github.com/bnomei/kirby3-robots-txt/releases/download/v1.0.3/kirby3-robots-txt.zip) as folder `site/plugins/kirby3-robots-txt`
+
+> Installation as a gitsubmodule is *not* supported.
+
+
 ## Setup
 
 The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
