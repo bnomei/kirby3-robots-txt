@@ -6,11 +6,11 @@
             'groups' => [
                 '*' => [ // user-agent
                     'disallow' => [
-                        '/kirby',
-                        '/site',
+                        '/kirby/',
+                        '/site/',
                     ],
                     'allow' => [
-                        '/media',
+                        '/media/',
                     ]
                 ]
             ]
@@ -22,21 +22,14 @@
                 'action' => function () {
                     $txt = [];
                     if ($str = option('bnomei.robots-txt.content')) {
-                        if(is_callable($str)) {
+                        if (is_callable($str)) {
                             $str = $str();
                         }
                         $txt[] = $str;
                     }
 
-                    if ($sitemap = option('bnomei.robots-txt.sitemap')) {
-                        if(is_callable($sitemap)) {
-                            $sitemap = $sitemap();
-                        }
-                        $txt[] = 'sitemap: ' . url($sitemap);
-                    }
-
                     if ($groups = option('bnomei.robots-txt.groups')) {
-                        if(is_callable($groups)) {
+                        if (is_callable($groups)) {
                             $groups = $groups();
                         }
                         if (is_array($groups)) {
@@ -51,6 +44,13 @@
                         } else {
                             $txt[] = $groups;
                         }
+                    }
+
+                    if ($sitemap = option('bnomei.robots-txt.sitemap')) {
+                        if (is_callable($sitemap)) {
+                            $sitemap = $sitemap();
+                        }
+                        $txt[] = 'sitemap: ' . url($sitemap);
                     }
 
                     $txt = implode(PHP_EOL, $txt).PHP_EOL;
