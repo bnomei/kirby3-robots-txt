@@ -4,6 +4,10 @@
 
 Manage the [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
 
+## Similar Plugins
+
+- [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
+
 ## Commerical Usage
 
 This plugin is free but if you use it in a commercial project please consider to 
