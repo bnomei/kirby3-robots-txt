@@ -18,7 +18,7 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Installation
 
 - for devkit-setup use `composer require bnomei/kirby3-robots-txt` or
-- extract latest release of [kirby3-robots-txt.zip](https://github.com/bnomei/kirby3-robots-txt/releases/download/v1.1.0/kirby3-robots-txt.zip) as folder `site/plugins/kirby3-robots-txt`
+- extract latest release of [kirby3-robots-txt.zip](https://github.com/bnomei/kirby3-robots-txt/releases/download/v1.1.1/kirby3-robots-txt.zip) as folder `site/plugins/kirby3-robots-txt`
 
 > Installation as a gitsubmodule is *not* supported.
 
@@ -26,6 +26,8 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Setup
 
 The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
+
+> TIP: If you are using the [kirby3-xmlsitemap Plugin](https://github.com/omz13/kirby3-xmlsitemap) your sitemap will be automatically added to the `robots.txt` file. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
 
 **defaults for starterkit**
 ```php

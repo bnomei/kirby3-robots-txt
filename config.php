@@ -51,6 +51,8 @@
                             $sitemap = $sitemap();
                         }
                         $txt[] = 'sitemap: ' . url($sitemap);
+                    } else if(option('omz13.xmlsitemap.disable') === false) {
+                        $txt[] = 'sitemap: ' . url('/sitemap.xml');
                     }
 
                     $txt = implode(PHP_EOL, $txt).PHP_EOL;
