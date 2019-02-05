@@ -36,11 +36,11 @@ return [
     'bnomei.robots-txt.groups' => [ // array or callback
         '*' => [ // user-agent
             'disallow' => [
-                '/kirby',
-                '/site',
+                '/kirby/',
+                '/site/',
             ],
             'allow' => [
-                '/media',
+                '/media/',
             ]
         ]
     ]
@@ -52,9 +52,9 @@ return [
 <?php
 return [
     'bnomei.robots-txt.content' => 'user-agent: *
-disallow: /kirby
-disallow: /site
-allow: /media',
+disallow: /kirby/
+disallow: /site/
+allow: /media/',
 ];
 ```
 
@@ -81,7 +81,7 @@ return [
         ],
         'googlebot-images' => [
             'allow' => [
-                '/media',
+                '/media/',
             ]
         ]
     ]
