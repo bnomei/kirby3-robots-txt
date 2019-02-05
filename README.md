@@ -1,27 +1,25 @@
 # Kirby 3 Robots.txt
 
-![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-robots-txt.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg)
+![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-robots-txt.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg) ![Kirby 3 Pluginkit](https://img.shields.io/badge/Pluginkit-YES-cca000.svg)
 
 Manage the [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
 
-## Similar Plugins
+## Similar Plugin
 
 - [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
 
 ## Commerical Usage
 
 This plugin is free but if you use it in a commercial project please consider to 
-- [make a donation 🍻](https://www.paypal.me/bnomei/0.5) or
+- [make a donation 🍻](https://www.paypal.me/bnomei/3) or
 - [buy me ☕](https://buymeacoff.ee/bnomei) or
 - [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
 ## Installation
 
-- for devkit-setup use `composer require bnomei/kirby3-robots-txt` or
-- extract latest release of [kirby3-robots-txt.zip](https://github.com/bnomei/kirby3-robots-txt/releases/download/v1.1.1/kirby3-robots-txt.zip) as folder `site/plugins/kirby3-robots-txt`
-
-> Installation as a gitsubmodule is *not* supported.
-
+- unzip [master.zip](https://github.com/bnomei/kirby3-robots-txt/archive/master.zip) as folder `site/plugins/kirby3-robots-txt` or
+- `git submodule add https://github.com/bnomei/kirby3-robots-txt.git site/plugins/kirby3-robots-txt` or
+- `composer require bnomei/kirby3-robots-txt`
 
 ## Setup
 
