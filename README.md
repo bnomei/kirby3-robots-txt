@@ -88,6 +88,10 @@ return [
 ];
 ```
 
+## Staging Server? Debug Mode = Disallow all
+
+Since v1.3.0 when you set the global Kirby `debug` config to `true` the plugin will disallow all indexing for all user-agents. This is especially usefull on a staging server but you could consider xml-sitemap and rss-feed among other things as well.
+
 ## Disclaimer
 
 This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/bnomei/kirby3-robots-txt/issues/new).
