@@ -33,7 +33,7 @@ Kirby::plugin('bnomei/robots-txt', [
 
                 if ($groups = option('bnomei.robots-txt.groups')) {
                     if (option('debug')) {
-                        $groups = ['*' => ['disallow' => '/']]
+                        $groups = ['*' => ['disallow' => '/']];
                     }
                     if (is_callable($groups)) {
                         $groups = $groups();
