@@ -33,7 +33,7 @@ Kirby::plugin('bnomei/robots-txt', [
 
                 if ($groups = option('bnomei.robots-txt.groups')) {
                     if (option('debug')) {
-                        $groups = ['*' => ['disallow' => '/']];
+                        $groups = ['*' => ['disallow' => ['/']]];
                     }
                     if (is_callable($groups)) {
                         $groups = $groups();
@@ -61,7 +61,7 @@ Kirby::plugin('bnomei/robots-txt', [
                     $txt[] = 'sitemap: ' . url('/sitemap.xml');
                 }
 
-                $txt = implode(PHP_EOL, $txt).PHP_EOL;
+                $txt = implode(PHP_EOL, $txt) . PHP_EOL;
                 if (strlen($txt) > 0) {
                     return new \Kirby\Http\Response($txt, 'text/plain', 200);
                 }
