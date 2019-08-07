@@ -2,7 +2,7 @@
     "name": "bnomei/kirby3-robots-txt",
     "type": "kirby-plugin",
     "description": "Manage the robots.txt from the Kirby config file",
-    "version": "1.3.2",
+    "version": "1.4.0",
     "license": "MIT",
     "authors": [
         {
@@ -17,11 +17,23 @@
         "robots-txt",
         "robots-exclusion-protocol"
     ],
+    "autoload": {
+      "psr-4": {
+        "Bnomei\\": "classes/"
+      }
+    },
     "config": {
         "optimize-autoloader": true
     },
     "require": {
         "php": ">=7.1.0",
         "getkirby/composer-installer": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    },
+    "scripts": {
+      "dist": "composer install --no-dev --optimize-autoloader",
+      "test": "phpunit --configuration ./phpunit.xml"
     }
 }
