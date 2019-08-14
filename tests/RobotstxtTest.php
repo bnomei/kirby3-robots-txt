@@ -42,7 +42,9 @@ final class RobotstxtTest extends TestCase
         $robotstxt = new Robotstxt(['content' => null]);
         $this->assertStringStartsWith('user-agent', $robotstxt->toTxt());
 
-        $robotstxt = new Robotstxt(['content' => function() { return '# Callable'; }]);
+        $robotstxt = new Robotstxt(['content' => function () {
+            return '# Callable';
+        }]);
         $this->assertStringStartsWith('# Callable' . PHP_EOL, $robotstxt->toTxt());
     }
 

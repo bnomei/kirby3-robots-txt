@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bnomei;
 
 final class Robotstxt
 {
     /**
-     * @var array
+     * @var string[]
      */
     private $txt;
     /**
@@ -15,6 +17,7 @@ final class Robotstxt
 
     /**
      * Robotstxt constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options = [])
@@ -51,6 +54,7 @@ final class Robotstxt
 
     /**
      * @param null $content
+     *
      * @return Robotstxt
      */
     private function addContent($content = null): Robotstxt
@@ -61,12 +65,13 @@ final class Robotstxt
         if (is_callable($content)) {
             $content = $content();
         }
-        $this->txt[] = (string)$content;
+        $this->txt[] = (string) $content;
         return $this;
     }
 
     /**
      * @param null $groups
+     *
      * @return Robotstxt
      */
     private function addGroups($groups = null): Robotstxt
@@ -77,7 +82,7 @@ final class Robotstxt
         if (\Kirby\Toolkit\A::get($this->options, 'debug')) {
             $groups = ['*' => ['disallow' => ['/']]];
         }
-        if (is_callable($groups)) {
+        if (! is_array($groups) && is_callable($groups)) {
             $groups = $groups();
         }
         if (is_array($groups)) {
@@ -90,13 +95,14 @@ final class Robotstxt
                 }
             }
         } else {
-            $this->txt[] = (string)$groups;
+            $this->txt[] = (string) $groups;
         }
         return $this;
     }
 
     /**
      * @param null $sitemap
+     *
      * @return Robotstxt
      */
     private function addSitemap($sitemap = null): Robotstxt

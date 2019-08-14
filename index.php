@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 @include_once __DIR__ . '/vendor/autoload.php';
 
 Kirby::plugin('bnomei/robots-txt', [
@@ -14,22 +16,23 @@ Kirby::plugin('bnomei/robots-txt', [
                 ],
                 'allow' => [
                     '/media/',
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ],
     'routes' => [
         [
             'pattern' => 'robots.txt',
             'method' => 'GET',
-            'action' => function () {
-                if ($txt = (new \Bnomei\Robotstxt())->toTxt()) {
+            'action' => static function () {
+                $txt = (new \Bnomei\Robotstxt())->toTxt();
+                if ($txt) {
                     return new \Kirby\Http\Response($txt, 'text/plain', 200);
                 }
                 return kirby()->site()->visit(
                     kirby()->site()->errorPage()
                 );
-            }
-        ]
-    ]
+            },
+        ],
+    ],
 ]);
