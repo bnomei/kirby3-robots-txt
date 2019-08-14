@@ -46,7 +46,7 @@ final class Robotstxt
      */
     public function toTxt(): ?string
     {
-        return count($this->txt) ? implode(PHP_EOL, $this->txt) : null;
+        return count($this->txt) ? implode(PHP_EOL, $this->txt) . PHP_EOL : null;
     }
 
     /**
