@@ -1,39 +1,44 @@
 {
-    "name": "bnomei/kirby3-robots-txt",
-    "type": "kirby-plugin",
-    "description": "Manage the robots.txt from the Kirby config file",
-    "version": "1.4.0",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Bruno Meilick",
-            "email": "b@bnomei.com"
-        }
-    ],
-    "keywords": [
-        "kirby3",
-        "kirby3-cms",
-        "kirby3-plugin",
-        "robots-txt",
-        "robots-exclusion-protocol"
-    ],
-    "autoload": {
-      "psr-4": {
-        "Bnomei\\": "classes/"
-      }
-    },
-    "config": {
-        "optimize-autoloader": true
-    },
-    "require": {
-        "php": ">=7.1.0",
-        "getkirby/composer-installer": "^1.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.3"
-    },
-    "scripts": {
-      "dist": "composer install --no-dev --optimize-autoloader",
-      "test": "phpunit --configuration ./phpunit.xml"
+  "name": "bnomei/kirby3-robots-txt",
+  "type": "kirby-plugin",
+  "description": "Manage the robots.txt from the Kirby config file",
+  "version": "1.4.0",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bruno Meilick",
+      "email": "b@bnomei.com"
     }
+  ],
+  "keywords": [
+    "kirby3",
+    "kirby3-cms",
+    "kirby3-plugin",
+    "robots-txt",
+    "robots-exclusion-protocol"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bnomei\\": "classes/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "require": {
+    "php": ">=7.1.0",
+    "getkirby/composer-installer": "^1.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.3",
+    "getkirby/cms": "^3.2"
+  },
+  "scripts": {
+    "dev": "composer install",
+    "test": "phpunit --configuration ./phpunit.xml",
+    "prod": "composer install --no-dev --optimize-autoloader"
+  },
+  "extra": {
+    "kirby-cms-path": "tests/kirby"
+  }
 }
