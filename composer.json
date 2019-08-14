@@ -34,9 +34,8 @@
     "getkirby/cms": "^3.2"
   },
   "scripts": {
-    "dev": "composer install",
     "test": "phpunit --configuration ./phpunit.xml",
-    "prod": "composer install --no-dev --optimize-autoloader"
+    "dist": "composer install --no-dev --optimize-autoloader"
   },
   "extra": {
     "kirby-cms-path": "tests/kirby"
