@@ -24,7 +24,7 @@ Kirby::plugin('bnomei/robots-txt', [
         [
             'pattern' => 'robots.txt',
             'method' => 'GET',
-            'action' => static function () {
+            'action' => function () {
                 $txt = (new \Bnomei\Robotstxt())->toTxt();
                 if ($txt) {
                     return new \Kirby\Http\Response($txt, 'text/plain', 200);
