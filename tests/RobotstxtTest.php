@@ -36,12 +36,21 @@ final class RobotstxtTest extends TestCase
 
     public function testAddContent()
     {
-        $robotstxt = new Robotstxt(['content' => '#Test Content' . PHP_EOL]);
+        $robotstxt = new Robotstxt(['content' => '#Test Content']);
         $this->assertStringStartsWith('#Test Content' . PHP_EOL, $robotstxt->toTxt());
+
+        $robotstxt = new Robotstxt(['content' => null]);
+        $this->assertStringStartsWith('user-agent', $robotstxt->toTxt());
+
+        $robotstxt = new Robotstxt(['content' => function() { return '# Callable'; }]);
+        $this->assertStringStartsWith('# Callable' . PHP_EOL, $robotstxt->toTxt());
     }
 
     public function testAddGroups()
     {
+        $robotstxt = new Robotstxt(['debug' => false, 'groups' => null]);
+        $this->assertNull($robotstxt->toTxt());
+
         $robotstxt = new Robotstxt(
             [
                 'debug' => false,
