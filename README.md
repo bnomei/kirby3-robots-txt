@@ -1,6 +1,6 @@
 # Kirby 3 Robots.txt
 
-![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-robots-txt.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg) ![Kirby 3 Pluginkit](https://img.shields.io/badge/Pluginkit-YES-cca000.svg)
+![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-robots-txt.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg) ![Kirby 3 Pluginkit](https://img.shields.io/badge/Pluginkit-YES-cca000.svg) [![Build Status](https://travis-ci.com/bnomei/kirby3-robots-txt.svg?branch=master)](https://travis-ci.com/bnomei/kirby3-robots-txt)
 
 Manage the [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
 
