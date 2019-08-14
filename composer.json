@@ -2,7 +2,7 @@
   "name": "bnomei/kirby3-robots-txt",
   "type": "kirby-plugin",
   "description": "Manage the robots.txt from the Kirby config file",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "license": "MIT",
   "authors": [
     {
