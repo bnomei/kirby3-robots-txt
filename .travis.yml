@@ -1,8 +1,10 @@
 language: php
-install: composer install
-script: composer test
 php:
   - 7.2
   - 7.3
 matrix:
   fast_finish: true
+install: composer install --dev --no-interaction
+script: phpunit --configuration ./phpunit.xml
+after_success: travis_retry php vendor/bin/php-coveralls -v
+

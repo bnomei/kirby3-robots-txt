@@ -5,6 +5,7 @@
 
 # phpunit tests
 tests/kirby
+tests/logs
 
 # files of Composer dependencies that are not needed for the plugin
 /vendor/**/.*

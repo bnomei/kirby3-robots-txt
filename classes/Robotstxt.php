@@ -106,9 +106,11 @@ final class Robotstxt
                 $sitemap = $sitemap();
             }
             $this->txt[] = 'sitemap: ' . url($sitemap);
+        // @codeCoverageIgnoreStart
         } elseif (option('omz13.xmlsitemap.disable') === false) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
         }
+        // @codeCoverageIgnoreEnd
         return $this;
     }
 }
