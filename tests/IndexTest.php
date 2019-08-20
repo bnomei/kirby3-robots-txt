@@ -12,7 +12,7 @@ class IndexTest extends TestCase
 
     public function testIndex()
     {
-        $r = kirby()->render('/robots.txt');
-        $this->assertIsInt($r->code(), 200);
+        $response = kirby()->render('/robots.txt');
+        $this->assertTrue($response->code() === 200);
     }
 }
