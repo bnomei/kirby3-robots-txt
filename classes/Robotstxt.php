@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Bnomei;
 
+use Kirby\Toolkit\A;
+
 final class Robotstxt
 {
     /**
@@ -31,9 +33,9 @@ final class Robotstxt
         $this->options['debug'] = option('debug');
         $this->options = array_merge($this->options, $options);
 
-        $this->addContent(\Kirby\Toolkit\A::get($this->options, 'content'));
-        $this->addGroups(\Kirby\Toolkit\A::get($this->options, 'groups'));
-        $this->addSitemap(\Kirby\Toolkit\A::get($this->options, 'sitemap'));
+        $this->addContent(A::get($this->options, 'content'));
+        $this->addGroups(A::get($this->options, 'groups'));
+        $this->addSitemap(A::get($this->options, 'sitemap'));
     }
 
     /**
@@ -79,7 +81,7 @@ final class Robotstxt
         if (! $groups) {
             return $this;
         }
-        if (\Kirby\Toolkit\A::get($this->options, 'debug')) {
+        if (A::get($this->options, 'debug')) {
             $groups = ['*' => ['disallow' => ['/']]];
         }
         if (! is_array($groups) && is_callable($groups)) {
