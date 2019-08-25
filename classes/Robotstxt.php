@@ -113,6 +113,10 @@ final class Robotstxt
      */
     private function addSitemap($sitemap = null): Robotstxt
     {
+        if (! $sitemap) {
+            return $this;
+        }
+
         // @codeCoverageIgnoreStart
         if (option('omz13.xmlsitemap.disable') === false) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
