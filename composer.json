@@ -26,7 +26,7 @@
     "optimize-autoloader": true
   },
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2.0",
     "getkirby/composer-installer": "^1.1"
   },
   "require-dev": {
@@ -50,5 +50,8 @@
   },
   "extra": {
     "kirby-cms-path": "tests/kirby"
+  },
+  "suggest": {
+    "omz13/kirby3-xmlsitemap": "Adds a xml sitemap which will be automatically be included in the robots.txt"
   }
 }
