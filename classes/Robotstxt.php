@@ -26,12 +26,19 @@ final class Robotstxt
     {
         $this->txt = [];
 
-        $this->options = [];
-        $this->options['content'] = option('bnomei.robots-txt.content');
-        $this->options['groups'] = option('bnomei.robots-txt.groups');
-        $this->options['sitemap'] = option('bnomei.robots-txt.sitemap');
-        $this->options['debug'] = option('debug');
-        $this->options = array_merge($this->options, $options);
+        $defaults = [
+            'debug' => option('debug'),
+            'content' => option('bnomei.robots-txt.content'),
+            'groups' => option('bnomei.robots-txt.groups'),
+            'sitemap' => option('bnomei.robots-txt.sitemap'),
+        ];
+        $this->options = array_merge($defaults, $options);
+
+        foreach ($this->options as $key => $call) {
+            if (is_callable($call)) {
+                $this->options[$key] = $call();
+            }
+        }
 
         $this->addContent(A::get($this->options, 'content'));
         $this->addGroups(A::get($this->options, 'groups'));
@@ -63,9 +70,6 @@ final class Robotstxt
     {
         if (! $content) {
             return $this;
-        }
-        if (is_callable($content)) {
-            $content = $content();
         }
         $this->txt[] = (string) $content;
         return $this;
@@ -109,16 +113,14 @@ final class Robotstxt
      */
     private function addSitemap($sitemap = null): Robotstxt
     {
-        if ($sitemap) {
-            if (is_callable($sitemap)) {
-                $sitemap = $sitemap();
-            }
-            $this->txt[] = 'sitemap: ' . url($sitemap);
         // @codeCoverageIgnoreStart
-        } elseif (option('omz13.xmlsitemap.disable') === false) {
+        if (option('omz13.xmlsitemap.disable') === false) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
         }
         // @codeCoverageIgnoreEnd
+
+        $this->txt[] = 'sitemap: ' . url($sitemap);
         return $this;
     }
 }
