@@ -88,7 +88,7 @@ final class Robotstxt
         if (A::get($this->options, 'debug')) {
             $groups = ['*' => ['disallow' => ['/']]];
         }
-        if (! is_array($groups) && is_callable($groups)) {
+        if (! is_array($groups) && ! is_string($groups) && is_callable($groups)) {
             $groups = $groups();
         }
         if (is_array($groups)) {
