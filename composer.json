@@ -2,7 +2,7 @@
   "name": "bnomei/kirby3-robots-txt",
   "type": "kirby-plugin",
   "description": "Manage the robots.txt from the Kirby config file",
-  "version": "1.4.9",
+  "version": "1.5.0",
   "license": "MIT",
   "authors": [
     {
@@ -51,6 +51,6 @@
     "kirby-cms-path": "tests/kirby"
   },
   "suggest": {
-    "omz13/kirby3-xmlsitemap": "Adds a xml sitemap which will be automatically be included in the robots.txt"
+    "bnomei/kirby3-feeds": "Adds a xml sitemap which will be automatically be included in the robots.txt"
   }
 }

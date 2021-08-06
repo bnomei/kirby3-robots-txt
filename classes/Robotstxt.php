@@ -122,6 +122,11 @@ final class Robotstxt
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
             return $this;
         }
+        $feedPlugin = kirby()->plugin('bnomei/feeds');
+        if ($feedPlugin && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
+            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
+        }
         // @codeCoverageIgnoreEnd
 
         $this->txt[] = 'sitemap: ' . url($sitemap);
