@@ -14,6 +14,8 @@ Manage the [robots.txt](https://developers.google.com/search/reference/robots_tx
 
 - [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
 
+## Commerical Usage
+
 > <br>
 > <b>Support open source!</b><br><br>
 > This plugin is free but if you use it in a commercial project please consider to sponsor me or make a donation.<br>
