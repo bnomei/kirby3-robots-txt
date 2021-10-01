@@ -14,7 +14,7 @@ Manage the [robots.txt](https://developers.google.com/search/reference/robots_tx
 
 - [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
 
-## Commerical Usage
+## Commercial Usage
 
 > <br>
 > <b>Support open source!</b><br><br>
