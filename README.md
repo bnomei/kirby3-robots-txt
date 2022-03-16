@@ -38,7 +38,7 @@ Manage the [robots.txt](https://developers.google.com/search/reference/robots_tx
 
 The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
 
-> TIP: If you are using the [kirby3-xmlsitemap Plugin](https://github.com/omz13/kirby3-xmlsitemap) your sitemap will be automatically added to the `robots.txt` file. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
+> TIP: If you are using the [kirby3-feeds Plugin](https://github.com/bnomei/kirby3-feeds) or [kirby3-xmlsitemap Plugin](https://github.com/omz13/kirby3-xmlsitemap) your sitemap will be automatically added to the `robots.txt` file. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
 
 **defaults for starterkit**
 ```php
