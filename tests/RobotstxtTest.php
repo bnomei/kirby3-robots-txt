@@ -72,23 +72,23 @@ final class RobotstxtTest extends TestCase
             ]
         );
         $txt = $robotstxt->toTxt();
-        $this->assertRegExp('/user-agent: \*\ndisallow: \/kirby\/\ndisallow: \/site\/\nallow: \/media\//', $txt);
+        $this->assertMatchesRegularExpression('/user-agent: \*\ndisallow: \/kirby\/\ndisallow: \/site\/\nallow: \/media\//', $txt);
 
         $robotstxt = new Robotstxt(['debug' => false, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
-        $this->assertRegExp('/user-agent: \*\ndisallow: \/panel\/\n/' . PHP_EOL, $robotstxt->toTxt());
+        $this->assertMatchesRegularExpression('/user-agent: \*\ndisallow: \/panel\/\n/' . PHP_EOL, $robotstxt->toTxt());
 
         $robotstxt = new Robotstxt(['debug' => true, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
-        $this->assertNotRegExp('/user-agent: \*\ndisallow: \/panel\/\n/' . PHP_EOL, $robotstxt->toTxt());
+        $this->assertDoesNotMatchRegularExpression('/user-agent: \*\ndisallow: \/panel\/\n/' . PHP_EOL, $robotstxt->toTxt());
     }
 
     public function testAddSitemap()
     {
         $robotstxt = new Robotstxt(['sitemap' => '/sitemap.xml']);
-        $this->assertRegExp('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
+        $this->assertMatchesRegularExpression('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
 
         $robotstxt = new Robotstxt(['sitemap' => function () {
             return '/sitemap.xml';
         }]);
-        $this->assertRegExp('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
+        $this->assertMatchesRegularExpression('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
     }
 }
