@@ -10,9 +10,16 @@
 
 Manage the [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
 
-## Similar Plugin
+## Similar Robots.txt Plugins
 
+- [kirby3-helpers](https://github.com/johannschopplich/kirby-helpers)
 - [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
+
+## Related SEO Plugins
+
+- [kirby3-seo](https://github.com/tobimori/kirby-seo)
+- [kirby3-helpers](https://github.com/johannschopplich/kirby-helpers)
+- [kirby-meta-knight](https://github.com/diesdasdigital/kirby-meta-knight)
 
 ## Commercial Usage
 
@@ -33,6 +40,12 @@ Manage the [robots.txt](https://developers.google.com/search/reference/robots_tx
 - unzip [master.zip](https://github.com/bnomei/kirby3-robots-txt/archive/master.zip) as folder `site/plugins/kirby3-robots-txt` or
 - `git submodule add https://github.com/bnomei/kirby3-robots-txt.git site/plugins/kirby3-robots-txt` or
 - `composer require bnomei/kirby3-robots-txt`
+
+## Staging Server? Debug Mode = Disallow all
+
+When you set the global Kirby `debug` config to `true` the plugin will disallow all indexing for all user-agents. This is especially useful on a staging server but you could consider xml-sitemap and rss-feed among other things as well.
+
+> ⚠️⚠️⚠️ THIS MEANS IF YOU HAVE KIRBY'S DEBUG MODE ENABLED IN PRODUCTION ALL SEARCH ENGINES WILL BE BLOCKED FROM INDEXING YOUR SITE!
 
 ## Setup
 
@@ -102,10 +115,6 @@ return [
     ]
 ];
 ```
-
-## Staging Server? Debug Mode = Disallow all
-
-Since v1.3.0 when you set the global Kirby `debug` config to `true` the plugin will disallow all indexing for all user-agents. This is especially usefull on a staging server but you could consider xml-sitemap and rss-feed among other things as well.
 
 ## Disclaimer
 
