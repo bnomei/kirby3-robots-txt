@@ -13,6 +13,7 @@ Kirby::plugin('bnomei/robots-txt', [
                 'disallow' => [
                     '/kirby/',
                     '/site/',
+                    '/cdn-cgi/', // cloudflare. https://developers.cloudflare.com/fundamentals/get-started/reference/cdn-cgi-endpoint/
                 ],
                 'allow' => [
                     '/media/',

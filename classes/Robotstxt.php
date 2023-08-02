@@ -122,6 +122,22 @@ final class Robotstxt
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
             return $this;
         }
+        if (option('fabianmichael.meta.sitemap') === true) {
+            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
+        }
+        if (option('tobimori.seo.robots.active') === false) {
+            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
+        }
+        if (option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false) {
+            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
+        }
+        if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
+            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+            return $this;
+        }
         $feedPlugin = kirby()->plugin('bnomei/feeds');
         if ($feedPlugin && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
