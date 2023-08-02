@@ -47,11 +47,13 @@ When you set the global Kirby `debug` config to `true` the plugin will disallow 
 
 > ⚠️⚠️⚠️ THIS MEANS IF YOU HAVE KIRBY'S DEBUG MODE ENABLED IN PRODUCTION ALL SEARCH ENGINES WILL BE BLOCKED FROM INDEXING YOUR SITE!
 
+## Adding Sitemap Link to Robots.txt
+
+This plugin will added the sitemap link **automatically** to the `robots.txt` file for most available SEO plugins. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml` in that case.
+
 ## Setup
 
 The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
-
-> TIP: This plugin will added the sitemap link will be automatically to the `robots.txt` file for most available SEO plugins if needed. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml` in that case.
 
 **defaults for starterkit**
 ```php
