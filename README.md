@@ -49,7 +49,7 @@ When you set the global Kirby `debug` config to `true` the plugin will disallow 
 
 ## Adding Sitemap Link to Robots.txt
 
-This plugin will added the sitemap link **automatically** to the `robots.txt` file for most available SEO plugins. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml` in that case.
+This plugin will add the sitemap link **automatically** to the `robots.txt` file for most available SEO plugins. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml` in that case.
 
 ## Setup
 
