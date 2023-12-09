@@ -113,10 +113,6 @@ final class Robotstxt
      */
     private function addSitemap($sitemap = null): Robotstxt
     {
-        if (! $sitemap) {
-            return $this;
-        }
-
         // @codeCoverageIgnoreStart
         if (option('omz13.xmlsitemap.disable') === false) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
@@ -138,12 +134,16 @@ final class Robotstxt
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
             return $this;
         }
-        $feedPlugin = kirby()->plugin('bnomei/feeds');
+        $feedPlugin = kirby()->plugin('bnomei/feed');
         if ($feedPlugin && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
             return $this;
         }
         // @codeCoverageIgnoreEnd
+
+        if (! $sitemap) {
+            return $this;
+        }
 
         $this->txt[] = 'sitemap: ' . url($sitemap);
         return $this;
