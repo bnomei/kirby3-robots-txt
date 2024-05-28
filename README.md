@@ -1,4 +1,4 @@
-# Kirby 3 Robots.txt
+# Kirby 3/4 Robots.txt
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-robots-txt?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-robots-txt?color=272822)

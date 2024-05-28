@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'bnomei/kirby3-robots-txt',
-        'pretty_version' => '1.8.0',
-        'version' => '1.8.0.0',
-        'reference' => NULL,
+        'pretty_version' => '1.9.0',
+        'version' => '1.9.0.0',
+        'reference' => null,
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'bnomei/kirby3-robots-txt' => array(
-            'pretty_version' => '1.8.0',
-            'version' => '1.8.0.0',
-            'reference' => NULL,
+            'pretty_version' => '1.9.0',
+            'version' => '1.9.0.0',
+            'reference' => null,
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

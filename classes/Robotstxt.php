@@ -135,7 +135,7 @@ final class Robotstxt
             return $this;
         }
         $feedPlugin = kirby()->plugin('bnomei/feed');
-        if ($feedPlugin && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
+        if ($feedPlugin && option('bnomei.feed.sitemap.enable') === true && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
             $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
             return $this;
         }
