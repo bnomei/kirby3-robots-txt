@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-@include_once __DIR__ . '/vendor/autoload.php';
+@include_once __DIR__.'/vendor/autoload.php';
 
 Kirby::plugin('bnomei/robots-txt', [
     'options' => [
@@ -26,10 +26,11 @@ Kirby::plugin('bnomei/robots-txt', [
             'pattern' => 'robots.txt',
             'method' => 'GET',
             'action' => function () {
-                $txt = (new \Bnomei\Robotstxt())->toTxt();
+                $txt = (new \Bnomei\Robotstxt)->toTxt();
                 if ($txt) {
                     return new \Kirby\Http\Response($txt, 'text/plain', 200);
                 }
+
                 return kirby()->site()->visit(
                     kirby()->site()->errorPage()
                 );

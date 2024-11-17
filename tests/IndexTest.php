@@ -6,8 +6,7 @@ class IndexTest extends TestCase
 {
     protected function setUp(): void
     {
-        $this->setOutputCallback(function () {
-        });
+        $this->setOutputCallback(function () {});
     }
 
     public function testIndex()

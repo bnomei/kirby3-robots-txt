@@ -1,59 +1,67 @@
 {
-  "name": "bnomei/kirby3-robots-txt",
-  "type": "kirby-plugin",
-  "description": "Manage the robots.txt from the Kirby config file",
-  "version": "1.9.0",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Bruno Meilick",
-      "email": "b@bnomei.com"
-    }
-  ],
-  "keywords": [
-    "kirby",
-    "kirby-cms",
-    "kirby-plugin",
-    "robots-txt",
-    "robots-exclusion-protocol"
-  ],
-  "autoload": {
-    "psr-4": {
-      "Bnomei\\": "classes/"
-    }
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "allow-plugins": {
-      "getkirby/composer-installer": true
-    }
-  },
-  "require": {
-    "php": ">=8.1.0",
-    "getkirby/composer-installer": "^1.1"
-  },
-  "require-dev": {
-    "getkirby/cms": "^4.0",
-    "php-coveralls/php-coveralls": "^2.4",
-    "phpunit/phpunit": "^9.5"
-  },
-  "scripts": {
-    "analyze": "phpstan analyse classes",
-    "fix": "php-cs-fixer fix",
-    "test": [
-      "mkdir -p tests/logs",
-      "@putenv XDEBUG_MODE=coverage",
-      "phpunit --configuration ./phpunit.xml"
+    "name": "bnomei/kirby3-robots-txt",
+    "type": "kirby-plugin",
+    "description": "Manage a virtual robots.txt from the Kirby config file",
+    "version": "5.0.0",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruno Meilick",
+            "email": "b@bnomei.com"
+        }
     ],
-    "dist": [
-      "composer install --no-dev --optimize-autoloader",
-      "git rm -rf --cached .; git add .;"
-    ]
-  },
-  "extra": {
-    "kirby-cms-path": "tests/kirby"
-  },
-  "suggest": {
-    "bnomei/kirby3-feeds": "Adds a xml sitemap which will be automatically be included in the robots.txt"
-  }
+    "keywords": [
+        "kirby",
+        "kirby-cms",
+        "kirby-plugin",
+        "robots-txt",
+        "robots-exclusion-protocol"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bnomei\\": "classes/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
+    },
+    "conflict": {
+        "getkirby/cms": "<5.0"
+    },
+    "require": {
+        "php": ">=8.2.0",
+        "getkirby/composer-installer": "^1.1"
+    },
+    "require-dev": {
+        "getkirby/cms": "^5.0.0-alpha.3",
+        "phpunit/phpunit": "^9.5",
+        "laravel/pint": "^1.13"
+    },
+    "scripts": {
+        "fix": "vendor/bin/pint",
+        "test": [
+            "mkdir -p tests/logs",
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --configuration ./phpunit.xml"
+        ],
+        "dist": [
+            "composer install --no-dev --optimize-autoloader",
+            "git rm -rf --cached .; git add .;"
+        ],
+        "kirby": [
+            "composer install",
+            "composer update",
+            "composer install --working-dir=tests/kirby --no-dev --optimize-autoloader",
+            "composer update --working-dir=tests/kirby"
+        ]
+    },
+    "extra": {
+        "kirby-cms-path": "tests/kirby"
+    },
+    "suggest": {
+        "bnomei/kirby3-feeds": "Adds a xml sitemap which will be automatically be included in the robots.txt"
+    }
 }

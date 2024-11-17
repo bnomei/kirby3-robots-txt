@@ -12,6 +12,7 @@ final class Robotstxt
      * @var string[]
      */
     private $txt;
+
     /**
      * @var array
      */
@@ -19,8 +20,6 @@ final class Robotstxt
 
     /**
      * Robotstxt constructor.
-     *
-     * @param array $options
      */
     public function __construct(array $options = [])
     {
@@ -35,7 +34,7 @@ final class Robotstxt
         $this->options = array_merge($defaults, $options);
 
         foreach ($this->options as $key => $call) {
-            if (is_callable($call)) {
+            if ($call instanceof \Closure) {
                 $this->options[$key] = $call();
             }
         }
@@ -45,26 +44,18 @@ final class Robotstxt
         $this->addSitemap(A::get($this->options, 'sitemap'));
     }
 
-    /**
-     * @return array|null
-     */
     public function toArray(): ?array
     {
         return count($this->txt) ? $this->txt : null;
     }
 
-    /**
-     * @return string|null
-     */
     public function toTxt(): ?string
     {
-        return count($this->txt) ? implode(PHP_EOL, $this->txt) . PHP_EOL : null;
+        return count($this->txt) ? implode(PHP_EOL, $this->txt).PHP_EOL : null;
     }
 
     /**
-     * @param null $content
-     *
-     * @return Robotstxt
+     * @param  null  $content
      */
     private function addContent($content = null): Robotstxt
     {
@@ -72,13 +63,12 @@ final class Robotstxt
             return $this;
         }
         $this->txt[] = (string) $content;
+
         return $this;
     }
 
     /**
-     * @param null $groups
-     *
-     * @return Robotstxt
+     * @param  null  $groups
      */
     private function addGroups($groups = null): Robotstxt
     {
@@ -93,50 +83,54 @@ final class Robotstxt
         }
         if (is_array($groups)) {
             foreach ($groups as $useragent => $group) {
-                $this->txt[] = 'user-agent: ' . $useragent;
+                $this->txt[] = 'user-agent: '.$useragent;
                 foreach ($group as $field => $values) {
                     foreach ($values as $value) {
-                        $this->txt[] = $field . ': ' . $value;
+                        $this->txt[] = $field.': '.$value;
                     }
                 }
             }
         } else {
             $this->txt[] = (string) $groups;
         }
+
         return $this;
     }
 
+    private function hasSitemapFromKnownPlugin(): bool
+    {
+        if (option('omz13.xmlsitemap.disable') === false) {
+            return true;
+        }
+        if (option('fabianmichael.meta.sitemap') === true) {
+            return true;
+        }
+        if (option('tobimori.seo.robots.active') === false) {
+            return true;
+        }
+        if (option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false) {
+            return true;
+        }
+        if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
+            return true;
+        }
+        $feedPlugin = kirby()->plugin('bnomei/feed');
+        if ($feedPlugin && option('bnomei.feed.sitemap.enable') === true && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
-     * @param null $sitemap
-     *
-     * @return Robotstxt
+     * @param  null  $sitemap
      */
     private function addSitemap($sitemap = null): Robotstxt
     {
         // @codeCoverageIgnoreStart
-        if (option('omz13.xmlsitemap.disable') === false) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
-            return $this;
-        }
-        if (option('fabianmichael.meta.sitemap') === true) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
-            return $this;
-        }
-        if (option('tobimori.seo.robots.active') === false) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
-            return $this;
-        }
-        if (option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
-            return $this;
-        }
-        if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
-            return $this;
-        }
-        $feedPlugin = kirby()->plugin('bnomei/feed');
-        if ($feedPlugin && option('bnomei.feed.sitemap.enable') === true && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
-            $this->txt[] = 'sitemap: ' . url('/sitemap.xml');
+        if ($this->hasSitemapFromKnownPlugin()) {
+            $this->txt[] = 'sitemap: '.url('/sitemap.xml');
+
             return $this;
         }
         // @codeCoverageIgnoreEnd
@@ -145,7 +139,8 @@ final class Robotstxt
             return $this;
         }
 
-        $this->txt[] = 'sitemap: ' . url($sitemap);
+        $this->txt[] = 'sitemap: '.url($sitemap);
+
         return $this;
     }
 }

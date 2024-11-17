@@ -5,30 +5,48 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  schedule:
-    - cron:  '0 2 * * *' # run at 2 AM UTC
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: Tests
+    env:
+      extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, redis, xdebug
+    name: Unit Tests
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.extensions }}
+          key: extensions-${{ hashFiles('composer.lock') }}
+
+      - name: Cache extensions
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
-          tools: composer
+          php-version: '8.2'
+          extensions: ${{ env.extensions }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
 
       - name: Install
-        run: composer install
-
-      # update kirby to latest release of version 4 (includes release candidates!)
-      # https://semver.mwl.be/#!?package=getkirby%2Fcms&version=4.*&minimum-stability=RC
-      - name: Update Kirby Core
-        run: composer require getkirby/cms:"4.*@RC"
+        run: composer kirby
 
       - name: Run Tests
         run: composer test

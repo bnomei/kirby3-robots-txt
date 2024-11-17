@@ -1,39 +1,14 @@
-# Kirby 3/4 Robots.txt
+# Kirby Robots.txt
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-robots-txt?color=ae81ff)
 ![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-robots-txt?color=272822)
-[![Build Status](https://flat.badgen.net/travis/bnomei/kirby3-robots-txt)](https://travis-ci.com/bnomei/kirby3-robots-txt)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/bnomei/kirby3-robots-txt)](https://coveralls.io/github/bnomei/kirby3-robots-txt) 
-[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt) 
-[![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
+[![Coverage](https://flat.badgen.net/codeclimate/coverage/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
+[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
+[![Discord](https://flat.badgen.net/badge/discord/bnomei?color=7289da)](https://discordapp.com/users/bnomei)
 
 
-Manage the [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
+Manage a virtual [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
 
-## Similar Robots.txt Plugins
-
-- [kirby3-helpers](https://github.com/johannschopplich/kirby-helpers)
-- [kirby3-wellknown](https://github.com/omz13/kirby3-wellknown)
-
-## Related SEO Plugins
-
-- [kirby3-seo](https://github.com/tobimori/kirby-seo)
-- [kirby3-helpers](https://github.com/johannschopplich/kirby-helpers)
-- [kirby-meta-knight](https://github.com/diesdasdigital/kirby-meta-knight)
-
-## Commercial Usage
-
-> <br>
-> <b>Support open source!</b><br><br>
-> This plugin is free but if you use it in a commercial project please consider to sponsor me or make a donation.<br>
-> If my work helped you to make some cash it seems fair to me that I might get a little reward as well, right?<br><br>
-> Be kind. Share a little. Thanks.<br><br>
-> &dash; Bruno<br>
-> &nbsp; 
-
-| M | O | N | E | Y |
-|---|----|---|---|---|
-| [Github sponsor](https://github.com/sponsors/bnomei) | [Patreon](https://patreon.com/bnomei) | [Buy Me a Coffee](https://buymeacoff.ee/bnomei) | [Paypal dontation](https://www.paypal.me/bnomei/15) | [Hire me](mailto:b@bnomei.com?subject=Kirby) |
 
 ## Installation
 
@@ -43,17 +18,18 @@ Manage the [robots.txt](https://developers.google.com/search/reference/robots_tx
 
 ## Staging Server? Debug Mode = Disallow all
 
-When you set the global Kirby `debug` config to `true` the plugin will disallow all indexing for all user-agents. This is especially useful on a staging server but you could consider xml-sitemap and rss-feed among other things as well.
+Setting the global Kirby `debug` configuration to `true` will prevent all indexing for every user agent. This is particularly useful on staging servers, but you may also want to consider it for XML sitemaps and RSS feeds, among other things.
 
-> ⚠️⚠️⚠️ THIS MEANS IF YOU HAVE KIRBY'S DEBUG MODE ENABLED IN PRODUCTION ALL SEARCH ENGINES WILL BE BLOCKED FROM INDEXING YOUR SITE!
+> [!WARNING]  
+> This means if you have Kirby's debug mode enabled in production, all search engines will be blocked from indexing your site!
 
 ## Adding Sitemap Link to Robots.txt
 
-This plugin will add the sitemap link **automatically** to the `robots.txt` file for most available SEO plugins. You can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml` in that case.
+This plugin will add the sitemap link **automatically** to the virtual `robots.txt` file for most available SEO plugins. In that case, you can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
 
 ## Setup
 
-The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would it would look like this.
+The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would, it would look like this.
 
 **defaults for starterkit**
 ```php

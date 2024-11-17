@@ -1,14 +1,18 @@
 # OS files
 .DS_Store
-*.cache
 .idea
+*.cache
 
-# phpunit tests
+/build
+
+/tests/clover.xml
 /tests/kirby
 /tests/logs
 /tests/media
+!/tests/content/*
 /tests/site/accounts
 /tests/site/cache
+/tests/site/sessions
 
 # files of Composer dependencies that are not needed for the plugin
 /vendor/**/.*
@@ -30,3 +34,4 @@
 /vendor/**/tests/*
 /vendor/**/php4/*
 /vendor/getkirby/composer-installer
+coverage.xml
