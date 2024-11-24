@@ -6,9 +6,7 @@
 [![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
 [![Discord](https://flat.badgen.net/badge/discord/bnomei?color=7289da)](https://discordapp.com/users/bnomei)
 
-
-Manage a virtual [robots.txt](https://developers.google.com/search/reference/robots_txt) from the Kirby config file.
-
+Installing the plugin is enough to get a virtual [robots.txt](https://developers.google.com/search/reference/robots_txt).
 
 ## Installation
 
@@ -16,22 +14,32 @@ Manage a virtual [robots.txt](https://developers.google.com/search/reference/rob
 - `git submodule add https://github.com/bnomei/kirby3-robots-txt.git site/plugins/kirby3-robots-txt` or
 - `composer require bnomei/kirby3-robots-txt`
 
-## Staging Server? Debug Mode = Disallow all
+## Zero-Configuration
 
-Setting the global Kirby `debug` configuration to `true` will prevent all indexing for every user agent. This is particularly useful on staging servers, but you may also want to consider it for XML sitemaps and RSS feeds, among other things.
+The plugin will work out of the box without the need to configure anything. It will generate a virtual `robots.txt` file with the following content.
+
+```txt
+User-agent: *
+Disallow: /kirby/
+Disallow: /site/
+Disallow: /cdn-cgi/
+Allow: /media/
+```
+
+## Active Debug Mode will block Indexing by Search Engines
 
 > [!WARNING]  
-> This means if you have Kirby's debug mode enabled in production, all search engines will be blocked from indexing your site!
+> Setting the global Kirby `debug` configuration to `true` will prevent all indexing for every user agent (all Search Engines).
 
-## Adding Sitemap Link to Robots.txt
+## Link to Sitemap.xml
 
-This plugin will add the sitemap link **automatically** to the virtual `robots.txt` file for most available SEO plugins. In that case, you can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
+This plugin will add the link to your `sitemap.xml` **automatically** for most available SEO plugins. In that case, you can skip setting the `bnomei.robots-txt.sitemap` config value to `sitemap.xml`.
 
-## Setup
+## Optional Manual Configuration
 
-The plugin generates automatic defaults for the starterkit. You do not have to enter them in the config file. But if you would, it would look like this.
+The plugin generates automatic defaults optimized for the official [Kirby Starterkit](https://github.com/getkirby/starterkit). You do not have to enter any of them in the config file. But if you would, they would look like this.
 
-**defaults for starterkit**
+**defaults for Kirby Starterkit**
 ```php
 <?php
 return [

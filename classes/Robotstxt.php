@@ -8,30 +8,17 @@ use Kirby\Toolkit\A;
 
 final class Robotstxt
 {
-    /**
-     * @var string[]
-     */
-    private $txt;
-
-    /**
-     * @var array
-     */
-    private $options;
-
-    /**
-     * Robotstxt constructor.
-     */
-    public function __construct(array $options = [])
-    {
-        $this->txt = [];
-
+    public function __construct(
+        private array $txt = [],
+        private array $options = []
+    ) {
         $defaults = [
             'debug' => option('debug'),
             'content' => option('bnomei.robots-txt.content'),
             'groups' => option('bnomei.robots-txt.groups'),
             'sitemap' => option('bnomei.robots-txt.sitemap'),
         ];
-        $this->options = array_merge($defaults, $options);
+        $this->options = array_merge($defaults, $this->options);
 
         foreach ($this->options as $key => $call) {
             if ($call instanceof \Closure) {
@@ -114,8 +101,7 @@ final class Robotstxt
         if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
             return true;
         }
-        $feedPlugin = kirby()->plugin('bnomei/feed');
-        if ($feedPlugin && option('bnomei.feed.sitemap.enable') === true && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
+        if (option('bnomei.feed.sitemap.enable') === true) {
             return true;
         }
 

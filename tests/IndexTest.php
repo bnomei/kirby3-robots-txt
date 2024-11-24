@@ -9,7 +9,7 @@ class IndexTest extends TestCase
         $this->setOutputCallback(function () {});
     }
 
-    public function testIndex()
+    public function test_index()
     {
         $response = kirby()->render('/robots.txt');
         $this->assertTrue($response->code() === 200);
