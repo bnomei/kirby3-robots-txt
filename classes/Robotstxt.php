@@ -90,26 +90,13 @@ final class Robotstxt
 
     private function hasSitemapFromKnownPlugin(): bool
     {
-        if (option('omz13.xmlsitemap.disable') === false) {
-            return true;
-        }
-        if (option('fabianmichael.meta.sitemap') === true) {
-            return true;
-        }
-        if (option('tobimori.seo.robots.active') === false) {
-            return true;
-        }
-        if (option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false) {
-            return true;
-        }
-        if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
-            return true;
-        }
-        if (option('bnomei.feed.sitemap.enable') === true) {
-            return true;
-        }
-
-        return false;
+        return count(array_filter([
+            option('omz13.xmlsitemap.disable') === false,
+            option('fabianmichael.meta.sitemap') === true,
+            option('tobimori.seo.robots.active') === false,
+            option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false,
+            option('bnomei.feed.sitemap.enable') === true,
+        ])) > 0;
     }
 
     private function addSitemap(mixed $sitemap = null): self
