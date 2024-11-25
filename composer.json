@@ -41,8 +41,7 @@
         "larastan/larastan": "^v3.0.0",
         "laravel/pint": "^1.13",
         "pestphp/pest": "^v3.5.1",
-        "spatie/ray": "^1.39",
-        "pestphp/pest-plugin-drift": "^3.0"
+        "spatie/ray": "^1.39"
     },
     "scripts": {
         "stan": "./vendor/bin/phpstan",
