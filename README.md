@@ -1,12 +1,15 @@
 # Kirby Robots.txt
 
-![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-robots-txt?color=ae81ff)
-![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-robots-txt?color=272822)
-[![Coverage](https://flat.badgen.net/codeclimate/coverage/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
-[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-robots-txt)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
-[![Discord](https://flat.badgen.net/badge/discord/bnomei?color=7289da)](https://discordapp.com/users/bnomei)
+[![Kirby 5](https://flat.badgen.net/badge/Kirby/5?color=ECC748)](https://getkirby.com)
+![PHP 8.2](https://flat.badgen.net/badge/PHP/8.2?color=4E5B93&icon=php&label)
+![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-robots-txt?color=ae81ff&icon=github&label)
+![Downloads](https://flat.badgen.net/packagist/dt/bnomei/kirby3-robots-txt?color=272822&icon=github&label)
+[![Coverage](https://flat.badgen.net/codeclimate/coverage/bnomei/kirby3-robots-txt?icon=codeclimate&label)](https://codeclimate.com/github/bnomei/kirby3-robots-txt)
+[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/bnomei/kirby3-robots-txt?icon=codeclimate&label)](https://codeclimate.com/github/bnomei/kirby3-robots-txt/issues)
+[![Discord](https://flat.badgen.net/badge/discord/bnomei?color=7289da&icon=discord&label)](https://discordapp.com/users/bnomei)
+[![Buymecoffee](https://flat.badgen.net/badge/icon/donate?icon=buymeacoffee&color=FF813F&label)](https://www.buymeacoffee.com/bnomei)
 
-Installing the plugin is enough to get a virtual [robots.txt](https://developers.google.com/search/reference/robots_txt).
+Installing the plugin is enough to get a virtual [robots.txt](https://developers.google.com/search/reference/robots_txt) file.
 
 ## Installation
 
@@ -26,9 +29,9 @@ Disallow: /cdn-cgi/
 Allow: /media/
 ```
 
-## Active Debug Mode will block Indexing by Search Engines
+## Active debug mode will block indexing by search engines
 
-> [!WARNING]  
+> [!WARNING]
 > Setting the global Kirby `debug` configuration to `true` will prevent all indexing for every user agent (all Search Engines).
 
 ## Link to Sitemap.xml

@@ -9,8 +9,8 @@ use Kirby\Toolkit\A;
 final class Robotstxt
 {
     public function __construct(
+        private array $options = [],
         private array $txt = [],
-        private array $options = []
     ) {
         $defaults = [
             'debug' => option('debug'),
@@ -18,7 +18,7 @@ final class Robotstxt
             'groups' => option('bnomei.robots-txt.groups'),
             'sitemap' => option('bnomei.robots-txt.sitemap'),
         ];
-        $this->options = array_merge($defaults, $this->options);
+        $this->options = array_merge($defaults, $options);
 
         foreach ($this->options as $key => $call) {
             if ($call instanceof \Closure) {
@@ -26,9 +26,14 @@ final class Robotstxt
             }
         }
 
-        $this->addContent(A::get($this->options, 'content'));
-        $this->addGroups(A::get($this->options, 'groups'));
-        $this->addSitemap(A::get($this->options, 'sitemap'));
+        $this->addContent($this->option('content'))
+            ->addGroups($this->option('groups'))
+            ->addSitemap($this->option('sitemap'));
+    }
+
+    public function option(string $key): mixed
+    {
+        return A::get($this->options, $key);
     }
 
     public function toArray(): ?array
@@ -41,44 +46,43 @@ final class Robotstxt
         return count($this->txt) ? implode(PHP_EOL, $this->txt).PHP_EOL : null;
     }
 
-    /**
-     * @param  null  $content
-     */
-    private function addContent($content = null): Robotstxt
+    private function addContent(mixed $content = null): self
     {
-        if (! $content) {
+        if (empty($content)) {
             return $this;
         }
-        $this->txt[] = (string) $content;
+        if (is_string($content)) {
+            $this->txt[] = $content;
+        }
 
         return $this;
     }
 
-    /**
-     * @param  null  $groups
-     */
-    private function addGroups($groups = null): Robotstxt
+    private function addGroups(mixed $groups = null): self
     {
-        if (! $groups) {
+        if (empty($groups)) {
             return $this;
         }
-        if (A::get($this->options, 'debug')) {
+        if ($this->option('debug')) {
             $groups = ['*' => ['disallow' => ['/']]];
-        }
-        if (! is_array($groups) && ! is_string($groups) && is_callable($groups)) {
-            $groups = $groups();
         }
         if (is_array($groups)) {
             foreach ($groups as $useragent => $group) {
                 $this->txt[] = 'user-agent: '.$useragent;
+                if (! is_array($group)) {
+                    continue;
+                }
                 foreach ($group as $field => $values) {
+                    if (! is_array($values)) {
+                        continue;
+                    }
                     foreach ($values as $value) {
-                        $this->txt[] = $field.': '.$value;
+                        $this->txt[] = implode('', [$field, ': ', $value]);
                     }
                 }
             }
-        } else {
-            $this->txt[] = (string) $groups;
+        } elseif (is_string($groups)) {
+            $this->txt[] = $groups;
         }
 
         return $this;
@@ -108,10 +112,7 @@ final class Robotstxt
         return false;
     }
 
-    /**
-     * @param  null  $sitemap
-     */
-    private function addSitemap($sitemap = null): Robotstxt
+    private function addSitemap(mixed $sitemap = null): self
     {
         // @codeCoverageIgnoreStart
         if ($this->hasSitemapFromKnownPlugin()) {
@@ -121,7 +122,7 @@ final class Robotstxt
         }
         // @codeCoverageIgnoreEnd
 
-        if (! $sitemap) {
+        if (! is_string($sitemap)) {
             return $this;
         }
 

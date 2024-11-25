@@ -20,4 +20,9 @@
             <clover outputFile="tests/clover.xml"/>
         </report>
     </coverage>
+    <source>
+        <include>
+            <directory suffix=".php">classes</directory>
+        </include>
+    </source>
 </phpunit>
