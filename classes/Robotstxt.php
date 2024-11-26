@@ -67,25 +67,38 @@ final class Robotstxt
             $groups = ['*' => ['disallow' => ['/']]];
         }
         if (is_array($groups)) {
-            foreach ($groups as $useragent => $group) {
-                $this->txt[] = 'user-agent: '.$useragent;
-                if (! is_array($group)) {
-                    continue;
-                }
-                foreach ($group as $field => $values) {
-                    if (! is_array($values)) {
-                        continue;
-                    }
-                    foreach ($values as $value) {
-                        $this->txt[] = implode('', [$field, ': ', $value]);
-                    }
-                }
-            }
+            $this->processGroupsArray($groups);
         } elseif (is_string($groups)) {
             $this->txt[] = $groups;
         }
 
         return $this;
+    }
+
+    private function processGroupsArray(array $groups): void
+    {
+        foreach ($groups as $useragent => $group) {
+            $this->txt[] = 'user-agent: '.$useragent;
+            if (is_array($group)) {
+                $this->processGroupFields($group);
+            }
+        }
+    }
+
+    private function processGroupFields(array $group): void
+    {
+        foreach ($group as $field => $values) {
+            if (is_array($values)) {
+                $this->processFieldValues($field, $values);
+            }
+        }
+    }
+
+    private function processFieldValues(string $field, array $values): void
+    {
+        foreach ($values as $value) {
+            $this->txt[] = implode('', [$field, ': ', $value]);
+        }
     }
 
     private function hasSitemapFromKnownPlugin(): bool
