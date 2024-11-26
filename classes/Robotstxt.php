@@ -8,23 +8,10 @@ use Kirby\Toolkit\A;
 
 final class Robotstxt
 {
-    /**
-     * @var string[]
-     */
-    private $txt;
-
-    /**
-     * @var array
-     */
-    private $options;
-
-    /**
-     * Robotstxt constructor.
-     */
-    public function __construct(array $options = [])
-    {
-        $this->txt = [];
-
+    public function __construct(
+        private array $options = [],
+        private array $txt = [],
+    ) {
         $defaults = [
             'debug' => option('debug'),
             'content' => option('bnomei.robots-txt.content'),
@@ -39,9 +26,14 @@ final class Robotstxt
             }
         }
 
-        $this->addContent(A::get($this->options, 'content'));
-        $this->addGroups(A::get($this->options, 'groups'));
-        $this->addSitemap(A::get($this->options, 'sitemap'));
+        $this->addContent($this->option('content'))
+            ->addGroups($this->option('groups'))
+            ->addSitemap($this->option('sitemap'));
+    }
+
+    public function option(string $key): mixed
+    {
+        return A::get($this->options, $key);
     }
 
     public function toArray(): ?array
@@ -54,44 +46,43 @@ final class Robotstxt
         return count($this->txt) ? implode(PHP_EOL, $this->txt).PHP_EOL : null;
     }
 
-    /**
-     * @param  null  $content
-     */
-    private function addContent($content = null): Robotstxt
+    private function addContent(mixed $content = null): self
     {
-        if (! $content) {
+        if (empty($content)) {
             return $this;
         }
-        $this->txt[] = (string) $content;
+        if (is_string($content)) {
+            $this->txt[] = $content;
+        }
 
         return $this;
     }
 
-    /**
-     * @param  null  $groups
-     */
-    private function addGroups($groups = null): Robotstxt
+    private function addGroups(mixed $groups = null): self
     {
-        if (! $groups) {
+        if (empty($groups)) {
             return $this;
         }
-        if (A::get($this->options, 'debug')) {
+        if ($this->option('debug')) {
             $groups = ['*' => ['disallow' => ['/']]];
-        }
-        if (! is_array($groups) && ! is_string($groups) && is_callable($groups)) {
-            $groups = $groups();
         }
         if (is_array($groups)) {
             foreach ($groups as $useragent => $group) {
                 $this->txt[] = 'user-agent: '.$useragent;
+                if (! is_array($group)) {
+                    continue;
+                }
                 foreach ($group as $field => $values) {
+                    if (! is_array($values)) {
+                        continue;
+                    }
                     foreach ($values as $value) {
-                        $this->txt[] = $field.': '.$value;
+                        $this->txt[] = implode('', [$field, ': ', $value]);
                     }
                 }
             }
-        } else {
-            $this->txt[] = (string) $groups;
+        } elseif (is_string($groups)) {
+            $this->txt[] = $groups;
         }
 
         return $this;
@@ -99,33 +90,16 @@ final class Robotstxt
 
     private function hasSitemapFromKnownPlugin(): bool
     {
-        if (option('omz13.xmlsitemap.disable') === false) {
-            return true;
-        }
-        if (option('fabianmichael.meta.sitemap') === true) {
-            return true;
-        }
-        if (option('tobimori.seo.robots.active') === false) {
-            return true;
-        }
-        if (option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false) {
-            return true;
-        }
-        if (option('kirbyzone.sitemapper.customMap') instanceof \Closure) {
-            return true;
-        }
-        $feedPlugin = kirby()->plugin('bnomei/feed');
-        if ($feedPlugin && option('bnomei.feed.sitemap.enable') === true && version_compare($feedPlugin->version(), '1.4.0', '>=')) {
-            return true;
-        }
-
-        return false;
+        return count(array_filter([
+            option('omz13.xmlsitemap.disable') === false,
+            option('fabianmichael.meta.sitemap') === true,
+            option('tobimori.seo.robots.active') === false,
+            option('johannschopplich.helpers.sitemap.enable') === true && option('johannschopplich.helpers.robots.enable') === false,
+            option('bnomei.feed.sitemap.enable') === true,
+        ])) > 0;
     }
 
-    /**
-     * @param  null  $sitemap
-     */
-    private function addSitemap($sitemap = null): Robotstxt
+    private function addSitemap(mixed $sitemap = null): self
     {
         // @codeCoverageIgnoreStart
         if ($this->hasSitemapFromKnownPlugin()) {
@@ -135,7 +109,7 @@ final class Robotstxt
         }
         // @codeCoverageIgnoreEnd
 
-        if (! $sitemap) {
+        if (! is_string($sitemap)) {
             return $this;
         }
 

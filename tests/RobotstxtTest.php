@@ -3,92 +3,73 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Bnomei\Robotstxt;
-use PHPUnit\Framework\TestCase;
 
-class RobotstxtTest extends TestCase
-{
-    public function testConstruct()
-    {
-        $robotstxt = new Robotstxt(['debug' => false]);
-        $this->assertInstanceOf(Robotstxt::class, $robotstxt);
-    }
+test('construct', function () {
+    $robotstxt = new Robotstxt(['debug' => false]);
+    expect($robotstxt)->toBeInstanceOf(Robotstxt::class);
+});
+test('to array', function () {
+    $robotstxt = new Robotstxt(['debug' => false]);
+    expect($robotstxt->toArray())->toBeArray();
+});
+test('to txt', function () {
+    $robotstxt = new Robotstxt(['debug' => false]);
+    expect($robotstxt->toTxt())->toBeString();
+});
+test('disallow all on debug', function () {
+    $robotstxt = new Robotstxt(['debug' => true]);
+    expect($robotstxt->option('debug'))->toBeTrue()
+        ->and($robotstxt->toTxt())->toContain('disallow: /'.PHP_EOL);
+});
+test('add content', function () {
+    $robotstxt = new Robotstxt(['content' => '#Test Content']);
+    expect($robotstxt->toTxt())->toStartWith('#Test Content'.PHP_EOL);
 
-    public function testToArray()
-    {
-        $robotstxt = new Robotstxt(['debug' => false]);
-        $this->assertIsArray($robotstxt->toArray());
-    }
+    $robotstxt = new Robotstxt(['content' => null]);
+    expect($robotstxt->toTxt())->toStartWith('user-agent');
 
-    public function testToTxt()
-    {
-        $robotstxt = new Robotstxt(['debug' => false]);
-        $this->assertIsString($robotstxt->toTxt());
-    }
+    $robotstxt = new Robotstxt(['content' => function () {
+        return '# Callable';
+    }]);
+    expect($robotstxt->toTxt())->toStartWith('# Callable'.PHP_EOL);
+});
+test('add groups', function () {
+    $robotstxt = new Robotstxt(['debug' => false, 'groups' => null]);
+    expect($robotstxt->toTxt())->toBeNull();
 
-    public function testDisallowAllOnDebug()
-    {
-        $robotstxt = new Robotstxt(['debug' => true]);
-        $this->assertStringContainsString('disallow: /'.PHP_EOL, $robotstxt->toTxt());
-
-        $robotstxt = new Robotstxt(['debug' => false]);
-        $this->assertStringNotContainsString('disallow: /'.PHP_EOL, $robotstxt->toTxt());
-    }
-
-    public function testAddContent()
-    {
-        $robotstxt = new Robotstxt(['content' => '#Test Content']);
-        $this->assertStringStartsWith('#Test Content'.PHP_EOL, $robotstxt->toTxt());
-
-        $robotstxt = new Robotstxt(['content' => null]);
-        $this->assertStringStartsWith('user-agent', $robotstxt->toTxt());
-
-        $robotstxt = new Robotstxt(['content' => function () {
-            return '# Callable';
-        }]);
-        $this->assertStringStartsWith('# Callable'.PHP_EOL, $robotstxt->toTxt());
-    }
-
-    public function testAddGroups()
-    {
-        $robotstxt = new Robotstxt(['debug' => false, 'groups' => null]);
-        $this->assertNull($robotstxt->toTxt());
-
-        $robotstxt = new Robotstxt(
-            [
-                'debug' => false,
-                'groups' => function () {
-                    return [
-                        '*' => [ // user-agent
-                            'disallow' => [
-                                '/kirby/',
-                                '/site/',
-                            ],
-                            'allow' => [
-                                '/media/',
-                            ],
+    $robotstxt = new Robotstxt(
+        [
+            'debug' => false,
+            'groups' => function () {
+                return [
+                    '*' => [ // user-agent
+                        'disallow' => [
+                            '/kirby/',
+                            '/site/',
                         ],
-                    ];
-                },
-            ]
-        );
-        $txt = $robotstxt->toTxt();
-        $this->assertMatchesRegularExpression('/user-agent: \*\ndisallow: \/kirby\/\ndisallow: \/site\/\nallow: \/media\//', $txt);
+                        'allow' => [
+                            '/media/',
+                        ],
+                    ],
+                ];
+            },
+        ]
+    );
+    $txt = $robotstxt->toTxt();
+    expect($txt)->toMatch('/user-agent: \*\ndisallow: \/kirby\/\ndisallow: \/site\/\nallow: \/media\//');
 
-        $robotstxt = new Robotstxt(['debug' => false, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
-        $this->assertMatchesRegularExpression('/user-agent: \*\ndisallow: \/panel\/\n/'.PHP_EOL, $robotstxt->toTxt());
+    $robotstxt = new Robotstxt(['debug' => false, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
+    expect($robotstxt->toTxt())->toMatch('/user-agent: \*\ndisallow: \/panel\/\n/'.PHP_EOL);
 
-        $robotstxt = new Robotstxt(['debug' => true, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
-        $this->assertDoesNotMatchRegularExpression('/user-agent: \*\ndisallow: \/panel\/\n/'.PHP_EOL, $robotstxt->toTxt());
-    }
+    $robotstxt = new Robotstxt(['debug' => true, 'groups' => "user-agent: *\ndisallow: /panel/\n"]);
+    $this->assertDoesNotMatchRegularExpression('/user-agent: \*\ndisallow: \/panel\/\n/'.PHP_EOL, $robotstxt->toTxt());
+});
+test('add sitemap', function () {
+    $robotstxt = new Robotstxt(['sitemap' => '/sitemap.xml']);
+    expect($robotstxt->toTxt())->toMatch('/sitemap: .*\/sitemap.xml/');
 
-    public function testAddSitemap()
-    {
-        $robotstxt = new Robotstxt(['sitemap' => '/sitemap.xml']);
-        $this->assertMatchesRegularExpression('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
-
-        $robotstxt = new Robotstxt(['sitemap' => function () {
-            return '/sitemap.xml';
-        }]);
-        $this->assertMatchesRegularExpression('/sitemap: .*\/sitemap.xml/', $robotstxt->toTxt());
-    }
-}
+    $robotstxt = new Robotstxt(['sitemap' => function () {
+        return '/sitemap.xml';
+    }]);
+    expect($robotstxt->toTxt())->toMatch('/sitemap: .*\/sitemap.xml/');
+});

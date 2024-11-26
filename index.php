@@ -32,7 +32,7 @@ Kirby::plugin('bnomei/robots-txt', [
                 }
 
                 return kirby()->site()->visit(
-                    kirby()->site()->errorPage()
+                    kirby()->site()->errorPage() ?? 'error'
                 );
             },
         ],
