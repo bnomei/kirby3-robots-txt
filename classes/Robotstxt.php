@@ -104,6 +104,7 @@ final class Robotstxt
     private function hasSitemapFromKnownPlugin(): bool
     {
         return count(array_filter([
+            option('isaactopo.xmlsitemap.ignore') !== null,
             option('omz13.xmlsitemap.disable') === false,
             option('fabianmichael.meta.sitemap') === true,
             option('tobimori.seo.robots.active') === false,
