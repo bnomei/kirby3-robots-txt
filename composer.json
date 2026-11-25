@@ -62,7 +62,10 @@
         ]
     },
     "extra": {
-        "kirby-cms-path": "tests/kirby"
+        "kirby-cms-path": "tests/kirby",
+        "kirby": {
+            "compatible": "^5.0 || ^6.0"
+        }
     },
     "suggest": {
         "bnomei/kirby3-feeds": "Adds a xml sitemap which will be automatically be included in the robots.txt"
